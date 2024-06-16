@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add data</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+        }
+         td{
+            padding: 10px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        input{
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 1px solid black;
+        }
+        .button{
+            padding: 10px 20px;
+            background-color: black;
+            color: white;
+            border-radius: 20px;
+            transition: all 0.2s linear;
+            border: 1px solid transparent;
+            text-decoration: none;
+        }
+        .button:hover{
+            background-color: white;
+            color: black;
+            border: 1px solid black;
+        }
+        h1{
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/addData" method="post" >
+        <table>
+            <tr>
+                <td>Enter weight : </td>
+                <td><input type="text" name="Weight" placeholder="Enter Total Weight"></td>
+            </tr>
+            <tr>
+                <td>Enter Loat : </td>
+                <td>
+                    <div onclick="addLoats()" class="button">Add More Loats</div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="text" name="count1" placeholder="Enter count"> </td>
+                <td><input type="text" name="loatWeight1" placeholder="Enter Weight of Loat"> </td>
+            </tr>
+            <table id="tbl"></table>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit"></td>
+                <td>
+                    <a href="/showData" class="button">Show</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+<script>
+    var table = document.getElementById('tbl');
+    var index = 2;
+    function addLoats() {
+        var column = '';
+        column += `<tr>`;
+        column += `<td><input type="text" name="count${index}" placeholder="Enter count"> </td>`;
+        column += `<td><input type="text" name="loatWeight${index}" placeholder="Enter Weight of Loat"> </td>`;
+        column += `<tr>`;
+        column += `</tr>`;
+        table.innerHTML += column;
+        index++;
+    }
+</script>
+
+</html>

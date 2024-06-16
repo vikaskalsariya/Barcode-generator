@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js" type="text/javascript"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .show {
+            width: 100%;
+            background-color: rgb(0, 0, 0);
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .box {
+            width: 32%;
+            background-color: rgb(255, 255, 255);
+            margin-block: 20px;
+            padding: 20px;
+        }
+
+        .inner-box {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .align-centre {
+            align-items: center;
+        }
+
+        label,
+        h3 {
+            margin-left: 20px;
+        }
+
+        .w-3 {
+            width: 30%;
+        }
+
+        .m {
+            margin: 1.5%;
+        }
+
+        .qr {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+
+        h1 {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="show">
+        <% var index = 0 %>
+        <% for(var v of data ){%>
+            <div class="box">
+                <div class="d-flex align-centre">
+                    <h2>Weight : </h2>
+                    <h3><%= v.weight %></h3>
+                </div>
+                <h2>Loats : </h2>
+                <div class="row">
+                    <% v.loat.map((lv,i)=>{%>
+                        <div class="w-3 m">
+                            <div class="inner-box d-flex">
+                                <label>Count :</label><span><%= lv.count %></span>
+                                </div>
+                                <div class="inner-box d-flex">
+                                    <label>Weight :</label><span><%= lv.loatWeight %></span>
+                                </div>
+                                <div class="qr">
+                                    <svg id="barcode<%= index %>"></svg>
+                                    <input type="hidden" class="idvalue" value="<%= lv.id %>">
+                                </div>
+                            </div>
+                            <% index++; %>
+                    <% }); %>
+                </div>
+            </div>
+            <%}%>
+    </div>
+</body>
+<script>
+    var idValue = Array.from(document.getElementsByClassName('idvalue'))
+        idValue.map((v,i)=>{
+            JsBarcode(`#barcode${i}`, v.value);
+        })
+</script>
+</html>
